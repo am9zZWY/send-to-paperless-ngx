@@ -1,0 +1,13 @@
+{
+  "name": "firefox-paperless-ngx",
+  "private": true,
+  "scripts": {
+    "start:firefox": "web-ext run --source-dir ./paperless-ngx",
+    "lint": "web-ext lint --source-dir ./paperless-ngx",
+    "build": "web-ext build --source-dir ./paperless-ngx",
+    "sign": "web-ext sign --channel unlisted --source-dir ./paperless-ngx"
+  },
+  "dependencies": {
+    "web-ext": "^9.4.0"
+  }
+}

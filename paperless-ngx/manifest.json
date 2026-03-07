@@ -1,0 +1,48 @@
+{
+    "manifest_version": 2,
+    "name": "Send to Paperless-ngx",
+    "version": "1.1.1",
+    "description": "Send PDFs to Paperless-ngx",
+    "icons": {
+        "512": "icons/icon-512.png"
+    },
+    "permissions": [
+        "activeTab",
+        "downloads",
+        "contextMenus",
+        "storage",
+        "notifications",
+        "<all_urls>"
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "send-to-paperless-ngx@am9zZWY.de",
+            "data_collection_permissions": {
+                "required": [
+                    "none"
+                ]
+            }
+        }
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "type": "module"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_icon": "icons/icon-512.png",
+        "default_title": "Send to Paperless-ngx",
+        "default_popup": "popup.html"
+    }
+}
