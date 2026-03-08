@@ -1,4 +1,4 @@
-import { isPdfFromUrl } from "./util.js";
+import { isPdfFromUrl, cleanURL } from "./util.js";
 
 /**
  * Extracts the filename from a URL.
@@ -36,12 +36,11 @@ async function upload(pdfBlob, filename) {
   let { paperlessUrl, apiKey } = await getConfig();
   if (!paperlessUrl || !apiKey) throw new Error("Paperless-ngx is not configured.");
 
-  if (paperlessUrl.endsWith("/")) {
-    paperlessUrl = paperlessUrl.slice(0, -1);
-  }
-
   const formData = new FormData();
   formData.append("document", pdfBlob, filename);
+
+  paperlessUrl = cleanURL(paperlessUrl);
+  apiKey = apiKey.trim();
 
   return fetch(`${paperlessUrl}/api/documents/post_document/`, {
     method: "POST",

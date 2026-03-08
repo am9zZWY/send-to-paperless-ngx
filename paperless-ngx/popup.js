@@ -1,4 +1,4 @@
-import { isPdfFromUrl } from "./util.js";
+import { isPdfFromUrl, cleanURL, debounce } from "./util.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const setupEl = document.getElementById("setup");
@@ -16,13 +16,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   let editMode = false;
 
   const config = await browser.storage.local.get(["paperlessUrl", "apiKey"]);
-  paperlessUrl = (config.paperlessUrl || "").trim();
-  apiKey = (config.apiKey || "").trim();
+  paperlessUrl = config.paperlessUrl || "";
+  apiKey = config.apiKey || "";
 
   render();
 
-  urlInput.onblur = keyInput.onblur = saveConfig;
-  urlInput.onkeydown = keyInput.onkeydown = (e) => e.key === "Enter" && saveConfig();
+  const lazySave = () => debounce(saveConfig, 400);
+
+  urlInput.onblur = saveConfig;
+  keyInput.onblur = saveConfig;
+  urlInput.onkeydown = lazySave;
+  keyInput.onkeydown = lazySave;
 
   uploadBtn.onclick = upload;
   editBtn.onclick = () => {
@@ -58,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function saveConfig() {
-    paperlessUrl = urlInput.value.trim();
+    paperlessUrl = cleanURL(urlInput.value);
     apiKey = keyInput.value.trim();
 
     await browser.storage.local.set({ paperlessUrl, apiKey });

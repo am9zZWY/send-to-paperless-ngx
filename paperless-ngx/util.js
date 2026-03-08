@@ -19,3 +19,30 @@ export async function isPdfFromUrl(url) {
     return url.toLowerCase().endsWith(".pdf");
   }
 }
+
+/**
+ * Remove trailingslash if it exists
+ * @param {string} s - Any string
+ * @return {string} - String with removed trailingslash
+ */
+export function cleanURL(s) {
+  let cleanedString = s.trim();
+  if (cleanedString.endsWith("/")) {
+    cleanedString = cleanedString.slice(0, -1);
+  }
+  return cleanedString.toLowerCase();
+}
+
+/**
+ * Execute a function lazily
+ * @param {*} fn
+ * @param {*} delay
+ * @returns
+ */
+export function debounce(fn, delay = 300) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), delay);
+  };
+}
