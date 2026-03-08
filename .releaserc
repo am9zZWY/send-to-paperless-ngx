@@ -1,0 +1,32 @@
+{
+    "branches": [
+        "main"
+    ],
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/exec",
+            {
+                "prepareCmd": "sed -i 's/\"version\": \".*\"/\"version\": \"${nextRelease.version}\"/' paperless-ngx/manifest.json"
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "manifest.json"
+                ],
+                "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+            }
+        ],
+        [
+            "@semantic-release/exec",
+            {
+                "prepareCmd": "bun run build",
+                "publishCmd": "bun run release"
+            }
+        ],
+        "@semantic-release/github"
+    ]
+}

@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Send to Paperless-ngx</title>
+    <style>
+      :root {
+        --primary-color: #196529;
+        --primary-hover: #145020;
+        --text-color: #333;
+        --light-gray: #f5f5f5;
+        --border-color: #ddd;
+      }
+
+      body {
+        width: 300px;
+        padding: 12px;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+          sans-serif;
+        font-size: 14px;
+        color: var(--text-color);
+        background-color: white;
+      }
+
+      h3 {
+        margin: 0 0 12px 0;
+        color: var(--primary-color);
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      #setup,
+      #main {
+        display: none;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(25, 101, 41, 0.1);
+      }
+
+      button {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 8px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      button.primary {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      button.primary:hover {
+        background-color: var(--primary-hover);
+      }
+
+      button.primary:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+
+      p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--text-color);
+        text-align: center;
+      }
+
+      #saveMsg,
+      #saveMsgMain {
+        color: var(--primary-color);
+        font-weight: 500;
+        min-height: 16px;
+      }
+
+      #saveMsg.error,
+      #saveMsgMain.error {
+        color: #d32f2f;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="setup">
+      <h3>Setup Paperless-ngx</h3>
+      <input type="text" id="urlInput" placeholder="Paperless-ngx URL" />
+      <input type="password" id="keyInput" placeholder="API Key" />
+      <button id="saveBtn">Save</button>
+      <p id="saveMsg"></p>
+    </div>
+    <div id="main">
+      <button id="uploadBtn">Upload</button>
+      <button id="editBtn">Edit Configuration</button>
+      <p id="saveMsgMain"></p>
+    </div>
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

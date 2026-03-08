@@ -1,0 +1,15 @@
+{
+  "summary": {
+    "en-US": "Sends PDFs to Paperless-ngx."
+  },
+  "categories": [
+    "other"
+  ],
+  "version": {
+    "license": "MPL-2.0"
+  },
+  "requires_payment": false,
+  "homepage": {
+    "en-US": "https://github.com/am9zZWY/send-to-paperless-ngx"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "firefox-paperless-ngx",
+  "private": true,
+  "scripts": {
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint && web-ext lint --source-dir ./paperless-ngx",
+    "lint:fix": "oxlint --fix",
+    "start:firefox": "web-ext run --source-dir ./paperless-ngx",
+    "build": "web-ext build --source-dir ./paperless-ngx",
+    "sign": "web-ext sign --channel unlisted -amo-metadata=./metadata.json --source-dir ./paperless-ngx",
+    "release": "web-ext sign --channel listed --amo-metadata=./metadata.json --source-dir ./paperless-ngx",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "web-ext": "^9.4.0"
+  },
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.2",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0"
+  }
+}
